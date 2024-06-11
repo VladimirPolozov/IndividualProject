@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.ProductsLabel = new System.Windows.Forms.Label();
             this.AddNewProductButton = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ProductsDataGridView = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.weightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,16 +55,16 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.warehousesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.warehousesTableAdapter = new WarehouseSystem.WarehouseSystemDataSetTableAdapters.WarehousesTableAdapter();
+            this.WarehousesDataGridView = new System.Windows.Forms.DataGridView();
             this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.adressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehousesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.warehousesTableAdapter = new WarehouseSystem.WarehouseSystemDataSetTableAdapters.WarehousesTableAdapter();
             this.button3 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseSystemDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WarehousesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehousesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,7 +77,7 @@
             this.ProductsLabel.Size = new System.Drawing.Size(87, 26);
             this.ProductsLabel.TabIndex = 0;
             this.ProductsLabel.Text = "Товары";
-            this.ProductsLabel.Click += new System.EventHandler(this.label1_Click);
+            this.ProductsLabel.Click += new System.EventHandler(this.ProductsLabel_Click);
             // 
             // AddNewProductButton
             // 
@@ -90,22 +90,22 @@
             this.AddNewProductButton.UseVisualStyleBackColor = true;
             this.AddNewProductButton.Click += new System.EventHandler(this.AddNewProductButton_Click);
             // 
-            // dataGridView1
+            // ProductsDataGridView
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ProductsDataGridView.AutoGenerateColumns = false;
+            this.ProductsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ProductsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
             this.weightDataGridViewTextBoxColumn,
             this.priceDataGridViewTextBoxColumn,
             this.thresholdValueDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.productsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(16, 47);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(543, 255);
-            this.dataGridView1.TabIndex = 3;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.ProductsDataGridView.DataSource = this.productsBindingSource;
+            this.ProductsDataGridView.Location = new System.Drawing.Point(16, 47);
+            this.ProductsDataGridView.Name = "ProductsDataGridView";
+            this.ProductsDataGridView.Size = new System.Drawing.Size(543, 255);
+            this.ProductsDataGridView.TabIndex = 3;
+            this.ProductsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductsDataGridView_CellContentClick);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -160,7 +160,7 @@
             this.ProductNameLabel.Size = new System.Drawing.Size(165, 18);
             this.ProductNameLabel.TabIndex = 4;
             this.ProductNameLabel.Text = "Наименование (Name)";
-            this.ProductNameLabel.Click += new System.EventHandler(this.label1_Click_2);
+            this.ProductNameLabel.Click += new System.EventHandler(this.ProductNameLabel_Click);
             // 
             // ProductNameTextBox
             // 
@@ -168,7 +168,7 @@
             this.ProductNameTextBox.Name = "ProductNameTextBox";
             this.ProductNameTextBox.Size = new System.Drawing.Size(356, 20);
             this.ProductNameTextBox.TabIndex = 5;
-            this.ProductNameTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.ProductNameTextBox.TextChanged += new System.EventHandler(this.ProductNameTextBox_TextChanged);
             // 
             // ProductWeightLabel
             // 
@@ -179,6 +179,7 @@
             this.ProductWeightLabel.Size = new System.Drawing.Size(93, 18);
             this.ProductWeightLabel.TabIndex = 6;
             this.ProductWeightLabel.Text = "Вес (Weight)";
+            this.ProductWeightLabel.Click += new System.EventHandler(this.ProductWeightLabel_Click);
             // 
             // ProductWeightTextBox
             // 
@@ -186,6 +187,7 @@
             this.ProductWeightTextBox.Name = "ProductWeightTextBox";
             this.ProductWeightTextBox.Size = new System.Drawing.Size(356, 20);
             this.ProductWeightTextBox.TabIndex = 7;
+            this.ProductWeightTextBox.TextChanged += new System.EventHandler(this.ProductWeightTextBox_TextChanged);
             // 
             // ProductPriceTextBox
             // 
@@ -193,6 +195,7 @@
             this.ProductPriceTextBox.Name = "ProductPriceTextBox";
             this.ProductPriceTextBox.Size = new System.Drawing.Size(356, 20);
             this.ProductPriceTextBox.TabIndex = 9;
+            this.ProductPriceTextBox.TextChanged += new System.EventHandler(this.ProductPriceTextBox_TextChanged);
             // 
             // ProductPriceLabel
             // 
@@ -203,6 +206,7 @@
             this.ProductPriceLabel.Size = new System.Drawing.Size(88, 18);
             this.ProductPriceLabel.TabIndex = 8;
             this.ProductPriceLabel.Text = "Цена (Price)";
+            this.ProductPriceLabel.Click += new System.EventHandler(this.ProductPriceLabel_Click);
             // 
             // ProductTresholdValueTextBox
             // 
@@ -210,6 +214,7 @@
             this.ProductTresholdValueTextBox.Name = "ProductTresholdValueTextBox";
             this.ProductTresholdValueTextBox.Size = new System.Drawing.Size(356, 20);
             this.ProductTresholdValueTextBox.TabIndex = 11;
+            this.ProductTresholdValueTextBox.TextChanged += new System.EventHandler(this.ProductTresholdValueTextBox_TextChanged);
             // 
             // ProductTresholdValueLabel
             // 
@@ -220,6 +225,7 @@
             this.ProductTresholdValueLabel.Size = new System.Drawing.Size(238, 18);
             this.ProductTresholdValueLabel.TabIndex = 10;
             this.ProductTresholdValueLabel.Text = "Пороговое кол-во (Treshold value)";
+            this.ProductTresholdValueLabel.Click += new System.EventHandler(this.ProductTresholdValueLabel_Click);
             // 
             // ChangeProductButton
             // 
@@ -230,7 +236,7 @@
             this.ChangeProductButton.TabIndex = 12;
             this.ChangeProductButton.Text = "Изменить";
             this.ChangeProductButton.UseVisualStyleBackColor = true;
-            this.ChangeProductButton.Click += new System.EventHandler(this.button1_Click);
+            this.ChangeProductButton.Click += new System.EventHandler(this.ChangeProductButton_Click);
             // 
             // DeleteProductButton
             // 
@@ -241,7 +247,7 @@
             this.DeleteProductButton.TabIndex = 13;
             this.DeleteProductButton.Text = "Удалить";
             this.DeleteProductButton.UseVisualStyleBackColor = true;
-            this.DeleteProductButton.Click += new System.EventHandler(this.button1_Click_1);
+            this.DeleteProductButton.Click += new System.EventHandler(this.DeleteProductButton_Click);
             // 
             // WarehousesLabel
             // 
@@ -290,27 +296,19 @@
             this.button2.Text = "Добавить";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // WarehousesDataGridView
             // 
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.WarehousesDataGridView.AutoGenerateColumns = false;
+            this.WarehousesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.WarehousesDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn1,
             this.adressDataGridViewTextBoxColumn});
-            this.dataGridView2.DataSource = this.warehousesBindingSource;
-            this.dataGridView2.Location = new System.Drawing.Point(17, 349);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(244, 264);
-            this.dataGridView2.TabIndex = 26;
-            // 
-            // warehousesBindingSource
-            // 
-            this.warehousesBindingSource.DataMember = "Warehouses";
-            this.warehousesBindingSource.DataSource = this.warehouseSystemDataSet;
-            // 
-            // warehousesTableAdapter
-            // 
-            this.warehousesTableAdapter.ClearBeforeFill = true;
+            this.WarehousesDataGridView.DataSource = this.warehousesBindingSource;
+            this.WarehousesDataGridView.Location = new System.Drawing.Point(17, 349);
+            this.WarehousesDataGridView.Name = "WarehousesDataGridView";
+            this.WarehousesDataGridView.Size = new System.Drawing.Size(244, 264);
+            this.WarehousesDataGridView.TabIndex = 26;
+            this.WarehousesDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WarehousesDataGridView_CellContentClick);
             // 
             // idDataGridViewTextBoxColumn1
             // 
@@ -323,6 +321,15 @@
             this.adressDataGridViewTextBoxColumn.DataPropertyName = "adress";
             this.adressDataGridViewTextBoxColumn.HeaderText = "adress";
             this.adressDataGridViewTextBoxColumn.Name = "adressDataGridViewTextBoxColumn";
+            // 
+            // warehousesBindingSource
+            // 
+            this.warehousesBindingSource.DataMember = "Warehouses";
+            this.warehousesBindingSource.DataSource = this.warehouseSystemDataSet;
+            // 
+            // warehousesTableAdapter
+            // 
+            this.warehousesTableAdapter.ClearBeforeFill = true;
             // 
             // button3
             // 
@@ -340,7 +347,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1624, 715);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.WarehousesDataGridView);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label5);
@@ -356,16 +363,16 @@
             this.Controls.Add(this.ProductWeightLabel);
             this.Controls.Add(this.ProductNameTextBox);
             this.Controls.Add(this.ProductNameLabel);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.ProductsDataGridView);
             this.Controls.Add(this.AddNewProductButton);
             this.Controls.Add(this.ProductsLabel);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ProductsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseSystemDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WarehousesDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehousesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -376,7 +383,7 @@
 
         private System.Windows.Forms.Label ProductsLabel;
         private System.Windows.Forms.Button AddNewProductButton;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView ProductsDataGridView;
         private WarehouseSystemDataSet warehouseSystemDataSet;
         private System.Windows.Forms.BindingSource productsBindingSource;
         private WarehouseSystemDataSetTableAdapters.ProductsTableAdapter productsTableAdapter;
@@ -400,7 +407,7 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView WarehousesDataGridView;
         private System.Windows.Forms.BindingSource warehousesBindingSource;
         private WarehouseSystemDataSetTableAdapters.WarehousesTableAdapter warehousesTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;

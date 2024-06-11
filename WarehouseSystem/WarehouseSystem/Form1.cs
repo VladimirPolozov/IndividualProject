@@ -1,100 +1,143 @@
 ﻿using System;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
+using System.Data;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WarehouseSystem
 {
     public partial class Form1 : Form
     {
-        public SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Надежда\\source\\repos\\IndividualProject\\WarehouseSystem\\WarehouseSystem\\WarehouseSystem.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=True");
-        public SqlCommand command;
-        public SqlDataAdapter adapter;
+        public DataSet ProductDataSet;
+        public SqlDataAdapter ProductDataAdapter;
+        public string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Надежда\\source\\repos\\IndividualProject\\WarehouseSystem\\WarehouseSystem\\WarehouseSystem.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=True";
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            string selectQuery = "SELECT * FROM Products";
+            ProductDataAdapter = new SqlDataAdapter(selectQuery, connectionString);
+
+            SqlCommandBuilder commandBuilder = new SqlCommandBuilder(ProductDataAdapter);
+            ProductDataSet = new DataSet();
+            ProductDataAdapter.Fill(ProductDataSet, "Products");
+
+            ProductsDataGridView.DataSource = ProductDataSet.Tables["Products"];
+        }
+
+        private void ProductsLabel_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
+        private void ProductNameLabel_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void ProductNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductWeightLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductWeightTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductPriceLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductPriceTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductTresholdValueLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductTresholdValueTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ProductsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ProductsDataGridView.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = ProductsDataGridView.SelectedRows[0];
+                ProductNameTextBox.Text = selectedRow.Cells["Name"].Value.ToString();
+                ProductWeightTextBox.Text = selectedRow.Cells["Weight"].Value.ToString();
+                ProductPriceTextBox.Text = selectedRow.Cells["Price"].Value.ToString();
+                ProductTresholdValueTextBox.Text = selectedRow.Cells["TresholdValue"].Value.ToString();
+            }
+
+        }
+
         private void AddNewProductButton_Click(object sender, EventArgs e)
         {
-            if (ProductNameTextBox.Text != "" && ProductWeightTextBox.Text != "" && ProductPriceTextBox.Text != "" && ProductTresholdValueTextBox.Text != "")
+            DataRow newRow = ProductDataSet.Tables["Products"].NewRow();
+            newRow["Name"] = ProductNameTextBox.Text;
+            newRow["Weight"] = int.Parse(ProductWeightTextBox.Text);
+            newRow["Price"] = int.Parse(ProductPriceTextBox.Text);
+            newRow["TresholdValue"] = int.Parse(ProductTresholdValueTextBox.Text);
+            ProductDataSet.Tables["Products"].Rows.Add(newRow);
+
+            ProductDataAdapter.Update(ProductDataSet, "Products");
+            ProductDataSet.Tables["Products"].Clear();
+            ProductDataAdapter.Fill(ProductDataSet, "Products");
+        }
+
+        private void ChangeProductButton_Click(object sender, EventArgs e)
+        {
+            if (ProductsDataGridView.SelectedRows.Count > 0)
             {
-                command = new SqlCommand("insert into Products(Nname,Weight,Price,TresholdValue) values(@name,@weight,@price,@tresholdValue", connection);
-                connection.Open();
-                command.Parameters.AddWithValue("@name", ProductNameTextBox.Text.ToString());
-                command.Parameters.AddWithValue("@weight", ProductWeightTextBox.Text.ToString());
-                command.Parameters.AddWithValue("@price", ProductPriceTextBox.Text.ToString());
-                command.Parameters.AddWithValue("@tresholdValue", ProductTresholdValueTextBox.Text.ToString());
-                command.ExecuteNonQuery();
-                connection.Close();
-                MessageBox.Show("Record Inserted Successfully");
-                DisplayProductsData();
-                ClearProductsData();
-            } else
-            {
-                MessageBox.Show("Please Provide Details!");
+                int selectedIndex = ProductsDataGridView.SelectedRows[0].Index;
+                int productId = (int)ProductsDataGridView.Rows[selectedIndex].Cells["Id"].Value;
+
+                DataRow row = ProductDataSet.Tables["Products"].Rows.Find(productId);
+                row["Name"] = ProductNameTextBox.Text;
+                row["Weight"] = int.Parse(ProductWeightTextBox.Text);
+                row["Price"] = int.Parse(ProductPriceTextBox.Text);
+                row["TresholdValue"] = int.Parse(ProductTresholdValueTextBox.Text);
+
+                ProductDataAdapter.Update(ProductDataSet, "Products");
+                ProductDataSet.Tables["Products"].Clear();
+                ProductDataAdapter.Fill(ProductDataSet, "Products");
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void DeleteProductButton_Click(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'warehouseSystemDataSet.Warehouses' table. You can move, or remove it, as needed.
-            // this.warehousesTableAdapter.Fill(this.warehouseSystemDataSet.Warehouses);
+            if (ProductsDataGridView.SelectedRows.Count > 0)
+            {
+                int selectedIndex = ProductsDataGridView.SelectedRows[0].Index;
+                int entryId = (int)ProductsDataGridView.Rows[selectedIndex].Cells["Id"].Value;
+
+                DataRow row = ProductDataSet.Tables["Products"].Rows.Find(entryId);
+                row.Delete();
+
+                ProductDataAdapter.Update(ProductDataSet, "Products");
+                ProductDataSet.Tables["Products"].Clear();
+                ProductDataAdapter.Fill(ProductDataSet, "Products");
+            }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void WarehousesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DisplayProductsData()
-        {
-            connection.Open();
-            DataTable dt = new DataTable();
-            adapter = new SqlDataAdapter("select * from Products", connection);
-            adapter.Fill(dt);
-            dataGridView1.DataSource = dt;
-            connection.Close();
-        }
-
-        private void ClearProductsData()
-        {
-            ProductNameTextBox.Text = "";
-            ProductWeightTextBox.Text = "";
-            ProductPriceTextBox.Text = "";
-            ProductTresholdValueTextBox.Text = "";
         }
     }
 }
