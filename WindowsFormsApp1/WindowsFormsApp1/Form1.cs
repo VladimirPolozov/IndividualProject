@@ -2,21 +2,28 @@
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Надежда\\Documents\\WarehouseSystemDB.mdf;Integrated Security=True;Connect Timeout=30";
+        public string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Надежда\\source\\repos\\IndividualProjectV2\\WindowsFormsApp1\\WindowsFormsApp1\\WarehouseSystemDB.mdf;Integrated Security=True;Connect Timeout=30";
         public SqlConnection connectionToDataBase;
         public SqlCommand command;
 
         public int ChosenProductId { get; set; }
-        public DataSet ProductDataSet;
-        public SqlDataAdapter ProductDataAdapter;
+        public int ChosenWarehouseId { get; set; }
 
+        public DataSet ProductDataSet;
         public DataSet WarehouseDataSet;
+        public SqlDataAdapter ProductDataAdapter;
         public SqlDataAdapter WarehouseDataAdapter;
+
+        public SqlDataAdapter productComboBoxAdapter;
+        public SqlDataAdapter warehouseComboBoxAdapter;
+        public DataTable productsTable;
+        public DataTable warehouseTable;
 
         public Form1()
         {
@@ -35,9 +42,17 @@ namespace WindowsFormsApp1
             ProductDataSet = new DataSet();
             ProductDataAdapter.Fill(ProductDataSet, "Products");
             ProductsDataGridView.DataSource = ProductDataSet.Tables["Products"];
-            ProductsDataGridView.CellClick += new DataGridViewCellEventHandler(ProductsDataGridView_CellContentClick);
             ProductsDataGridView.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(ProductsDataGridView_OnRowHeaderMouseClick);
 
+            selectQuery = "SELECT * FROM Warehouses";
+            WarehouseDataAdapter = new SqlDataAdapter(selectQuery, connectionString);
+            WarehouseDataSet = new DataSet();
+            WarehouseDataAdapter.Fill(WarehouseDataSet, "Warehouses");
+            WarehousesDataGridView.DataSource = WarehouseDataSet.Tables["Warehouses"];
+            WarehousesDataGridView.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(WarehousesDataGridView_OnRowHeaderMouseClick);
+
+            FillProductComboBox();
+            FillWarehouseComboBox();
         }
 
         private void ProductsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -53,6 +68,14 @@ namespace WindowsFormsApp1
             ProductWeightTextBox.Text = selectedRow.Cells[2].Value.ToString();
             ProductPriceTextBox.Text = selectedRow.Cells[3].Value.ToString();
             ProductThresholdValueTextBox.Text = selectedRow.Cells[4].Value.ToString();
+        }
+
+        private void WarehousesDataGridView_OnRowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow selectedRow = WarehousesDataGridView.SelectedRows[0];
+            ChosenWarehouseId = int.Parse(selectedRow.Cells[0].Value.ToString());
+            WarehouseNameTextBox.Text = selectedRow.Cells[1].Value.ToString();
+            WarehouseAdressTextBox.Text = selectedRow.Cells[0].Value.ToString();
 
         }
 
@@ -115,6 +138,7 @@ namespace WindowsFormsApp1
 
                 UpdateDataInProductsDataGridView();
                 ClearProductsFields();
+                FillProductComboBox();
             } else
             {
                 MessageBox.Show("Поле \"Наименование\" не может быть пустым. Заполните его", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -128,7 +152,8 @@ namespace WindowsFormsApp1
                 SqlConnection connectionToDataBase = new SqlConnection(connectionString);
                 connectionToDataBase.Open();
 
-                command = new SqlCommand("update Products set Name=@Name,Weight=@Weight,Price=@Price,ThresholdValue=@ThresholdValue", connectionToDataBase);
+                command = new SqlCommand("update Products set Name=@Name,Weight=@Weight,Price=@Price,ThresholdValue=@ThresholdValue WHERE Id=@Id", connectionToDataBase);
+                command.Parameters.AddWithValue("@Id", ChosenProductId);
                 command.Parameters.AddWithValue("@Name", ProductNameTextBox.Text);
                 command.Parameters.AddWithValue("@Weight", ProductWeightTextBox.Text);
                 command.Parameters.AddWithValue("@Price", ProductPriceTextBox.Text);
@@ -140,6 +165,7 @@ namespace WindowsFormsApp1
 
                 UpdateDataInProductsDataGridView();
                 ClearProductsFields();
+                FillProductComboBox();
             } else
             {
                 MessageBox.Show("Поле \"Наименование\" не может быть пустым. Заполните его", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -162,6 +188,7 @@ namespace WindowsFormsApp1
 
                 UpdateDataInProductsDataGridView();
                 ClearProductsFields();
+                FillProductComboBox();
             } else
             {
                 MessageBox.Show("Вы не выбрали товар. Выберите товар, который хотите удалить", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -183,6 +210,183 @@ namespace WindowsFormsApp1
             ProductWeightTextBox.Text = "";
             ProductPriceTextBox.Text = "";
             ProductThresholdValueTextBox.Text = "";
+        }
+
+        private void WarehousesLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WarehousesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void WarehouseNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WarehouseNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WarehouseAdressLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WarehouseAdressTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddNewWarehouseButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(WarehouseNameTextBox.Text))
+            {
+                SqlConnection connectionToDataBase = new SqlConnection(connectionString);
+                connectionToDataBase.Open();
+
+                command = new SqlCommand("INSERT INTO Warehouses(Name,Adress) values(@Name,@Adress)", connectionToDataBase);
+                command.Parameters.AddWithValue("@Name", WarehouseNameTextBox.Text);
+                command.Parameters.AddWithValue("@Adress", WarehouseAdressTextBox.Text);
+                command.ExecuteNonQuery();
+
+                MessageBox.Show($"Склад {WarehouseNameTextBox.Text} добавлен в базу данных", "Сообщение");
+                connectionToDataBase.Close();
+
+                UpdateDataInWarehousesDataGridView();
+                ClearWarehousesFields();
+                FillWarehouseComboBox();
+            } else
+            {
+                MessageBox.Show("Поле Название (Name) не может быть пустым. Заполните его", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ChangeWarehouseButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(WarehouseNameTextBox.Text))
+            {
+                SqlConnection connectionToDataBase = new SqlConnection(connectionString);
+                connectionToDataBase.Open();
+
+                command = new SqlCommand("UPDATE Warehouses SET Name=@Name,Adress=@Adress WHERE Id=@Id", connectionToDataBase);
+                command.Parameters.AddWithValue("@Id", ChosenWarehouseId);
+                command.Parameters.AddWithValue("@Name", WarehouseNameTextBox.Text);
+                command.Parameters.AddWithValue("@Adress", WarehouseAdressTextBox.Text);
+                command.ExecuteNonQuery();
+
+                MessageBox.Show($"Данные о складе {WarehouseNameTextBox.Text} обновлены", "Сообщение");
+                connectionToDataBase.Close();
+
+                UpdateDataInWarehousesDataGridView();
+                ClearWarehousesFields();
+                FillWarehouseComboBox();
+            } else
+            {
+                MessageBox.Show("Поле Название (Name) не может быть пустым. Заполните его", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DeleteWarehouseButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(WarehouseNameTextBox.Text))
+            {
+                SqlConnection connectionToDataBase = new SqlConnection(connectionString);
+                connectionToDataBase.Open();
+
+                command = new SqlCommand("DELETE Warehouses WHERE Id=@Id", connectionToDataBase);
+                command.Parameters.AddWithValue("@Id", ChosenWarehouseId);
+                command.ExecuteNonQuery();
+
+                MessageBox.Show($"Склад {WarehouseNameTextBox.Text} удалён", "Сообщение");
+                connectionToDataBase.Close();
+
+                UpdateDataInWarehousesDataGridView();
+                ClearWarehousesFields();
+                FillWarehouseComboBox();
+            } else
+            {
+                MessageBox.Show("Вы не выбрали склад. Выберите склад, который хотите удалить", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UpdateDataInWarehousesDataGridView()
+        {
+            string selectQuery = "SELECT * FROM Warehouses";
+            WarehouseDataAdapter = new SqlDataAdapter(selectQuery, connectionString);
+            WarehouseDataSet = new DataSet();
+            WarehouseDataAdapter.Fill(WarehouseDataSet, "Warehouse");
+            WarehousesDataGridView.DataSource = WarehouseDataSet.Tables["Warehouse"];
+        }
+
+        private void ClearWarehousesFields()
+        {
+            WarehouseNameTextBox.Text = "";
+            WarehouseAdressTextBox.Text = "";
+        }
+
+        private void CountInfoLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EntriesGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void ChooseProductLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChooseProductComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChooseWarehouseLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChooseWarehouseComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FillProductComboBox()
+        {
+            SqlConnection connectionToDataBase = new SqlConnection(connectionString);
+            connectionToDataBase.Open();
+
+            string query = "SELECT Id, Name FROM Products ORDER BY Name";
+            productComboBoxAdapter = new SqlDataAdapter(query, connectionToDataBase);
+            productsTable = new DataTable();
+            productComboBoxAdapter.Fill(productsTable);
+
+            ChooseProductComboBox.DataSource = productsTable;
+            ChooseProductComboBox.DisplayMember = "Name";
+            ChooseProductComboBox.ValueMember = "Id";
+        }
+
+        private void FillWarehouseComboBox()
+        {
+            SqlConnection connectionToDataBase = new SqlConnection(connectionString);
+            connectionToDataBase.Open();
+
+            string query = "SELECT Id, Name FROM Warehouses ORDER BY Name";
+            warehouseComboBoxAdapter = new SqlDataAdapter(query, connectionToDataBase);
+            warehouseTable = new DataTable();
+            warehouseComboBoxAdapter.Fill(warehouseTable);
+
+            ChooseWarehouseComboBox.DataSource = warehouseTable;
+            ChooseWarehouseComboBox.DisplayMember = "Name";
+            ChooseWarehouseComboBox.ValueMember = "Id";
         }
     }
 }
