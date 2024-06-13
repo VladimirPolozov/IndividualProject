@@ -19,11 +19,13 @@ namespace WindowsFormsApp1
         public DataSet WarehouseDataSet;
         public SqlDataAdapter ProductDataAdapter;
         public SqlDataAdapter WarehouseDataAdapter;
+        public SqlDataAdapter EntiresDataAdapter;
+        public DataTable EntriesTable;
 
-        public SqlDataAdapter productComboBoxAdapter;
-        public SqlDataAdapter warehouseComboBoxAdapter;
-        public DataTable productsTable;
-        public DataTable warehouseTable;
+        public SqlDataAdapter ProductComboBoxAdapter;
+        public SqlDataAdapter WarehouseComboBoxAdapter;
+        public DataTable ProductsTable;
+        public DataTable WarehouseTable;
 
         public Form1()
         {
@@ -53,6 +55,7 @@ namespace WindowsFormsApp1
 
             FillProductComboBox();
             FillWarehouseComboBox();
+            FillEntriesDataGridView();
         }
 
         private void ProductsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -365,11 +368,11 @@ namespace WindowsFormsApp1
             connectionToDataBase.Open();
 
             string query = "SELECT Id, Name FROM Products ORDER BY Name";
-            productComboBoxAdapter = new SqlDataAdapter(query, connectionToDataBase);
-            productsTable = new DataTable();
-            productComboBoxAdapter.Fill(productsTable);
+            ProductComboBoxAdapter = new SqlDataAdapter(query, connectionToDataBase);
+            ProductsTable = new DataTable();
+            ProductComboBoxAdapter.Fill(ProductsTable);
 
-            ChooseProductComboBox.DataSource = productsTable;
+            ChooseProductComboBox.DataSource = ProductsTable;
             ChooseProductComboBox.DisplayMember = "Name";
             ChooseProductComboBox.ValueMember = "Id";
         }
@@ -380,13 +383,42 @@ namespace WindowsFormsApp1
             connectionToDataBase.Open();
 
             string query = "SELECT Id, Name FROM Warehouses ORDER BY Name";
-            warehouseComboBoxAdapter = new SqlDataAdapter(query, connectionToDataBase);
-            warehouseTable = new DataTable();
-            warehouseComboBoxAdapter.Fill(warehouseTable);
+            WarehouseComboBoxAdapter = new SqlDataAdapter(query, connectionToDataBase);
+            WarehouseTable = new DataTable();
+            WarehouseComboBoxAdapter.Fill(WarehouseTable);
 
-            ChooseWarehouseComboBox.DataSource = warehouseTable;
+            ChooseWarehouseComboBox.DataSource = WarehouseTable;
             ChooseWarehouseComboBox.DisplayMember = "Name";
             ChooseWarehouseComboBox.ValueMember = "Id";
+        }
+
+        private void FillEntriesDataGridView()
+        {
+            SqlConnection connectionToDataBase = new SqlConnection(connectionString);
+            connectionToDataBase.Open();
+
+            string query = @"
+                    SELECT
+                        Entries.Id,
+                        Products.Name AS ProductName,
+                        Warehouses.Name AS WarehouseName,
+                        Entries.Count
+                    FROM
+                        Entries
+                    JOIN
+                        Products ON Entries.ProductId = Products.Id
+                    JOIN
+                        Warehouses ON Entries.WarehouseId = Warehouses.Id";
+
+            EntiresDataAdapter = new SqlDataAdapter(query, connectionToDataBase);
+            DataTable entriesTable = new DataTable();
+            EntiresDataAdapter.Fill(entriesTable);
+            EntriesGridView.DataSource = entriesTable;
+        }
+
+        private void AddToWarehouseButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

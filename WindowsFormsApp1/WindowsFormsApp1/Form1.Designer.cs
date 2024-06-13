@@ -31,6 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.ProductsLabel = new System.Windows.Forms.Label();
             this.ProductsDataGridView = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.thresholdValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.warehouseSystemDBDataSet = new WindowsFormsApp1.WarehouseSystemDBDataSet();
             this.DeleteProductButton = new System.Windows.Forms.Button();
             this.ChangeProductButtton = new System.Windows.Forms.Button();
             this.AddNewProductButton = new System.Windows.Forms.Button();
@@ -48,38 +55,35 @@
             this.WarehouseNameLabel = new System.Windows.Forms.Label();
             this.WarehousesLabel = new System.Windows.Forms.Label();
             this.WarehousesDataGridView = new System.Windows.Forms.DataGridView();
-            this.AddNewWarehouseButton = new System.Windows.Forms.Button();
-            this.ChangeWarehouseButton = new System.Windows.Forms.Button();
-            this.DeleteWarehouseButton = new System.Windows.Forms.Button();
-            this.warehouseSystemDBDataSet = new WindowsFormsApp1.WarehouseSystemDBDataSet();
-            this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productsTableAdapter = new WindowsFormsApp1.WarehouseSystemDBDataSetTableAdapters.ProductsTableAdapter();
-            this.warehousesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.warehousesTableAdapter = new WindowsFormsApp1.WarehouseSystemDBDataSetTableAdapters.WarehousesTableAdapter();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.weightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.thresholdValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.adressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehousesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.AddNewWarehouseButton = new System.Windows.Forms.Button();
+            this.ChangeWarehouseButton = new System.Windows.Forms.Button();
+            this.DeleteWarehouseButton = new System.Windows.Forms.Button();
+            this.productsTableAdapter = new WindowsFormsApp1.WarehouseSystemDBDataSetTableAdapters.ProductsTableAdapter();
+            this.warehousesTableAdapter = new WindowsFormsApp1.WarehouseSystemDBDataSetTableAdapters.WarehousesTableAdapter();
             this.CountInfoLabel = new System.Windows.Forms.Label();
             this.EntriesGridView = new System.Windows.Forms.DataGridView();
             this.entriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entriesTableAdapter = new WindowsFormsApp1.WarehouseSystemDBDataSetTableAdapters.EntriesTableAdapter();
-            this.idDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouseIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ChooseProductLabel = new System.Windows.Forms.Label();
             this.ChooseProductComboBox = new System.Windows.Forms.ComboBox();
             this.ChooseWarehouseComboBox = new System.Windows.Forms.ComboBox();
             this.ChooseWarehouseLabel = new System.Windows.Forms.Label();
+            this.ProductCountLabel = new System.Windows.Forms.Label();
+            this.ProductCountTextBox = new System.Windows.Forms.TextBox();
+            this.RemoveFromWarehouseButton = new System.Windows.Forms.Button();
+            this.AddToWarehouseButton = new System.Windows.Forms.Button();
+            this.idDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WarehouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WarehousesDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.warehouseSystemDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warehouseSystemDBDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WarehousesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehousesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EntriesGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.entriesBindingSource)).BeginInit();
@@ -115,6 +119,53 @@
             this.ProductsDataGridView.Size = new System.Drawing.Size(594, 278);
             this.ProductsDataGridView.TabIndex = 2;
             this.ProductsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductsDataGridView_CellContentClick);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // weightDataGridViewTextBoxColumn
+            // 
+            this.weightDataGridViewTextBoxColumn.DataPropertyName = "Weight";
+            this.weightDataGridViewTextBoxColumn.HeaderText = "Вес";
+            this.weightDataGridViewTextBoxColumn.Name = "weightDataGridViewTextBoxColumn";
+            this.weightDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            this.priceDataGridViewTextBoxColumn.HeaderText = "Стоимость";
+            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // thresholdValueDataGridViewTextBoxColumn
+            // 
+            this.thresholdValueDataGridViewTextBoxColumn.DataPropertyName = "ThresholdValue";
+            this.thresholdValueDataGridViewTextBoxColumn.HeaderText = "Порог";
+            this.thresholdValueDataGridViewTextBoxColumn.Name = "thresholdValueDataGridViewTextBoxColumn";
+            this.thresholdValueDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // productsBindingSource
+            // 
+            this.productsBindingSource.DataMember = "Products";
+            this.productsBindingSource.DataSource = this.warehouseSystemDBDataSet;
+            // 
+            // warehouseSystemDBDataSet
+            // 
+            this.warehouseSystemDBDataSet.DataSetName = "WarehouseSystemDBDataSet";
+            this.warehouseSystemDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // DeleteProductButton
             // 
@@ -298,6 +349,35 @@
             this.WarehousesDataGridView.TabIndex = 60;
             this.WarehousesDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WarehousesDataGridView_CellContentClick);
             // 
+            // idDataGridViewTextBoxColumn1
+            // 
+            this.idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn1.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            this.idDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn1.Width = 50;
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn1.HeaderText = "Название";
+            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn1.Width = 250;
+            // 
+            // adressDataGridViewTextBoxColumn
+            // 
+            this.adressDataGridViewTextBoxColumn.DataPropertyName = "Adress";
+            this.adressDataGridViewTextBoxColumn.HeaderText = "Адрес";
+            this.adressDataGridViewTextBoxColumn.Name = "adressDataGridViewTextBoxColumn";
+            this.adressDataGridViewTextBoxColumn.ReadOnly = true;
+            this.adressDataGridViewTextBoxColumn.Width = 250;
+            // 
+            // warehousesBindingSource
+            // 
+            this.warehousesBindingSource.DataMember = "Warehouses";
+            this.warehousesBindingSource.DataSource = this.warehouseSystemDBDataSet;
+            // 
             // AddNewWarehouseButton
             // 
             this.AddNewWarehouseButton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -331,89 +411,13 @@
             this.DeleteWarehouseButton.UseVisualStyleBackColor = true;
             this.DeleteWarehouseButton.Click += new System.EventHandler(this.DeleteWarehouseButton_Click);
             // 
-            // warehouseSystemDBDataSet
-            // 
-            this.warehouseSystemDBDataSet.DataSetName = "WarehouseSystemDBDataSet";
-            this.warehouseSystemDBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // productsBindingSource
-            // 
-            this.productsBindingSource.DataMember = "Products";
-            this.productsBindingSource.DataSource = this.warehouseSystemDBDataSet;
-            // 
             // productsTableAdapter
             // 
             this.productsTableAdapter.ClearBeforeFill = true;
             // 
-            // warehousesBindingSource
-            // 
-            this.warehousesBindingSource.DataMember = "Warehouses";
-            this.warehousesBindingSource.DataSource = this.warehouseSystemDBDataSet;
-            // 
             // warehousesTableAdapter
             // 
             this.warehousesTableAdapter.ClearBeforeFill = true;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.Width = 200;
-            // 
-            // weightDataGridViewTextBoxColumn
-            // 
-            this.weightDataGridViewTextBoxColumn.DataPropertyName = "Weight";
-            this.weightDataGridViewTextBoxColumn.HeaderText = "Вес";
-            this.weightDataGridViewTextBoxColumn.Name = "weightDataGridViewTextBoxColumn";
-            this.weightDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // priceDataGridViewTextBoxColumn
-            // 
-            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
-            this.priceDataGridViewTextBoxColumn.HeaderText = "Стоимость";
-            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
-            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // thresholdValueDataGridViewTextBoxColumn
-            // 
-            this.thresholdValueDataGridViewTextBoxColumn.DataPropertyName = "ThresholdValue";
-            this.thresholdValueDataGridViewTextBoxColumn.HeaderText = "Порог";
-            this.thresholdValueDataGridViewTextBoxColumn.Name = "thresholdValueDataGridViewTextBoxColumn";
-            this.thresholdValueDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idDataGridViewTextBoxColumn1
-            // 
-            this.idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
-            this.idDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn1.Width = 50;
-            // 
-            // nameDataGridViewTextBoxColumn1
-            // 
-            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn1.HeaderText = "Название";
-            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn1.Width = 250;
-            // 
-            // adressDataGridViewTextBoxColumn
-            // 
-            this.adressDataGridViewTextBoxColumn.DataPropertyName = "Adress";
-            this.adressDataGridViewTextBoxColumn.HeaderText = "Адрес";
-            this.adressDataGridViewTextBoxColumn.Name = "adressDataGridViewTextBoxColumn";
-            this.adressDataGridViewTextBoxColumn.ReadOnly = true;
-            this.adressDataGridViewTextBoxColumn.Width = 250;
             // 
             // CountInfoLabel
             // 
@@ -428,16 +432,19 @@
             // 
             // EntriesGridView
             // 
+            this.EntriesGridView.AllowUserToAddRows = false;
+            this.EntriesGridView.AllowUserToDeleteRows = false;
             this.EntriesGridView.AutoGenerateColumns = false;
             this.EntriesGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.EntriesGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn2,
-            this.warehouseIdDataGridViewTextBoxColumn,
-            this.productIdDataGridViewTextBoxColumn,
+            this.ProductName,
+            this.WarehouseName,
             this.countDataGridViewTextBoxColumn});
             this.EntriesGridView.DataSource = this.entriesBindingSource;
             this.EntriesGridView.Location = new System.Drawing.Point(12, 690);
             this.EntriesGridView.Name = "EntriesGridView";
+            this.EntriesGridView.ReadOnly = true;
             this.EntriesGridView.Size = new System.Drawing.Size(593, 218);
             this.EntriesGridView.TabIndex = 62;
             this.EntriesGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EntriesGridView_CellContentClick);
@@ -450,31 +457,6 @@
             // entriesTableAdapter
             // 
             this.entriesTableAdapter.ClearBeforeFill = true;
-            // 
-            // idDataGridViewTextBoxColumn2
-            // 
-            this.idDataGridViewTextBoxColumn2.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn2.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn2.Name = "idDataGridViewTextBoxColumn2";
-            this.idDataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // warehouseIdDataGridViewTextBoxColumn
-            // 
-            this.warehouseIdDataGridViewTextBoxColumn.DataPropertyName = "WarehouseId";
-            this.warehouseIdDataGridViewTextBoxColumn.HeaderText = "WarehouseId";
-            this.warehouseIdDataGridViewTextBoxColumn.Name = "warehouseIdDataGridViewTextBoxColumn";
-            // 
-            // productIdDataGridViewTextBoxColumn
-            // 
-            this.productIdDataGridViewTextBoxColumn.DataPropertyName = "ProductId";
-            this.productIdDataGridViewTextBoxColumn.HeaderText = "ProductId";
-            this.productIdDataGridViewTextBoxColumn.Name = "productIdDataGridViewTextBoxColumn";
-            // 
-            // countDataGridViewTextBoxColumn
-            // 
-            this.countDataGridViewTextBoxColumn.DataPropertyName = "Count";
-            this.countDataGridViewTextBoxColumn.HeaderText = "Count";
-            this.countDataGridViewTextBoxColumn.Name = "countDataGridViewTextBoxColumn";
             // 
             // ChooseProductLabel
             // 
@@ -518,11 +500,83 @@
             this.ChooseWarehouseLabel.Text = "Склад";
             this.ChooseWarehouseLabel.Click += new System.EventHandler(this.ChooseWarehouseLabel_Click);
             // 
+            // ProductCountLabel
+            // 
+            this.ProductCountLabel.AutoSize = true;
+            this.ProductCountLabel.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ProductCountLabel.Location = new System.Drawing.Point(615, 800);
+            this.ProductCountLabel.Name = "ProductCountLabel";
+            this.ProductCountLabel.Size = new System.Drawing.Size(87, 18);
+            this.ProductCountLabel.TabIndex = 67;
+            this.ProductCountLabel.Text = "Количество";
+            // 
+            // ProductCountTextBox
+            // 
+            this.ProductCountTextBox.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold);
+            this.ProductCountTextBox.Location = new System.Drawing.Point(618, 821);
+            this.ProductCountTextBox.Name = "ProductCountTextBox";
+            this.ProductCountTextBox.Size = new System.Drawing.Size(303, 21);
+            this.ProductCountTextBox.TabIndex = 68;
+            // 
+            // RemoveFromWarehouseButton
+            // 
+            this.RemoveFromWarehouseButton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RemoveFromWarehouseButton.Location = new System.Drawing.Point(618, 881);
+            this.RemoveFromWarehouseButton.Name = "RemoveFromWarehouseButton";
+            this.RemoveFromWarehouseButton.Size = new System.Drawing.Size(303, 27);
+            this.RemoveFromWarehouseButton.TabIndex = 71;
+            this.RemoveFromWarehouseButton.Text = "Удалить со склада";
+            this.RemoveFromWarehouseButton.UseVisualStyleBackColor = true;
+            // 
+            // AddToWarehouseButton
+            // 
+            this.AddToWarehouseButton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddToWarehouseButton.Location = new System.Drawing.Point(618, 848);
+            this.AddToWarehouseButton.Name = "AddToWarehouseButton";
+            this.AddToWarehouseButton.Size = new System.Drawing.Size(304, 27);
+            this.AddToWarehouseButton.TabIndex = 69;
+            this.AddToWarehouseButton.Text = "Добавить на склад";
+            this.AddToWarehouseButton.UseVisualStyleBackColor = true;
+            this.AddToWarehouseButton.Click += new System.EventHandler(this.AddToWarehouseButton_Click);
+            // 
+            // idDataGridViewTextBoxColumn2
+            // 
+            this.idDataGridViewTextBoxColumn2.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn2.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn2.Name = "idDataGridViewTextBoxColumn2";
+            this.idDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn2.Width = 50;
+            // 
+            // ProductName
+            // 
+            this.ProductName.HeaderText = "Товар";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            this.ProductName.Width = 200;
+            // 
+            // WarehouseName
+            // 
+            this.WarehouseName.HeaderText = "Склад";
+            this.WarehouseName.Name = "WarehouseName";
+            this.WarehouseName.ReadOnly = true;
+            this.WarehouseName.Width = 200;
+            // 
+            // countDataGridViewTextBoxColumn
+            // 
+            this.countDataGridViewTextBoxColumn.DataPropertyName = "Count";
+            this.countDataGridViewTextBoxColumn.HeaderText = "Кол-во";
+            this.countDataGridViewTextBoxColumn.Name = "countDataGridViewTextBoxColumn";
+            this.countDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 985);
+            this.ClientSize = new System.Drawing.Size(948, 985);
+            this.Controls.Add(this.RemoveFromWarehouseButton);
+            this.Controls.Add(this.AddToWarehouseButton);
+            this.Controls.Add(this.ProductCountTextBox);
+            this.Controls.Add(this.ProductCountLabel);
             this.Controls.Add(this.ChooseWarehouseComboBox);
             this.Controls.Add(this.ChooseWarehouseLabel);
             this.Controls.Add(this.ChooseProductComboBox);
@@ -555,9 +609,9 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ProductsDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WarehousesDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.warehouseSystemDBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.warehouseSystemDBDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WarehousesDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehousesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EntriesGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.entriesBindingSource)).EndInit();
@@ -607,14 +661,18 @@
         private System.Windows.Forms.DataGridView EntriesGridView;
         private System.Windows.Forms.BindingSource entriesBindingSource;
         private WarehouseSystemDBDataSetTableAdapters.EntriesTableAdapter entriesTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn countDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label ChooseProductLabel;
         private System.Windows.Forms.ComboBox ChooseProductComboBox;
         private System.Windows.Forms.ComboBox ChooseWarehouseComboBox;
         private System.Windows.Forms.Label ChooseWarehouseLabel;
+        private System.Windows.Forms.Label ProductCountLabel;
+        private System.Windows.Forms.TextBox ProductCountTextBox;
+        private System.Windows.Forms.Button RemoveFromWarehouseButton;
+        private System.Windows.Forms.Button AddToWarehouseButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WarehouseName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn countDataGridViewTextBoxColumn;
     }
 }
 
