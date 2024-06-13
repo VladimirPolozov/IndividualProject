@@ -75,6 +75,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WarehouseSystemDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="WarehouseSystemDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WarehouseSystemDataSet1.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +111,17 @@
     </None>
     <None Include="WarehouseSystemDataSet.xss">
       <DependentUpon>WarehouseSystemDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="WarehouseSystemDataSet1.xsc">
+      <DependentUpon>WarehouseSystemDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="WarehouseSystemDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>WarehouseSystemDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="WarehouseSystemDataSet1.xss">
+      <DependentUpon>WarehouseSystemDataSet1.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
