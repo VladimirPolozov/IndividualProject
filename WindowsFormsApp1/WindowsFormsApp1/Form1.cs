@@ -56,6 +56,7 @@ namespace WindowsFormsApp1
             FillProductComboBox();
             FillWarehouseComboBox();
             FillEntriesDataGridView();
+            EntriesGridView.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(EntriesGridView_OnRowHeaderMouseClick);
         }
 
         private void ProductsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -79,7 +80,14 @@ namespace WindowsFormsApp1
             ChosenWarehouseId = int.Parse(selectedRow.Cells[0].Value.ToString());
             WarehouseNameTextBox.Text = selectedRow.Cells[1].Value.ToString();
             WarehouseAdressTextBox.Text = selectedRow.Cells[0].Value.ToString();
+        }
 
+        private void EntriesGridView_OnRowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            /*DataGridViewRow selectedRow = EntriesGridView.SelectedRows[0];
+            ChooseProductComboBox.SelectedValue = int.Parse(selectedRow.Cells[4].Value.ToString());
+            ChooseWarehouseComboBox.SelectedValue = int.Parse(selectedRow.Cells[5].Value.ToString());
+            ProductCountTextBox.Text = selectedRow.Cells[3].Value.ToString();*/
         }
 
         private void ProductNameLabel_Click(object sender, EventArgs e)
@@ -129,14 +137,13 @@ namespace WindowsFormsApp1
                 SqlConnection connectionToDataBase = new SqlConnection(connectionString);
                 connectionToDataBase.Open();
 
-                command = new SqlCommand("insert into Products(Name,Weight,Price,ThresholdValue) values(@Name,@Weight,@Price,@ThresholdValue)", connectionToDataBase);
+                command = new SqlCommand("INSERT INTO Products(Name, Weight, Price, ThresholdValue) values(@Name, @Weight, @Price, @ThresholdValue)", connectionToDataBase);
                 command.Parameters.AddWithValue("@Name", ProductNameTextBox.Text);
                 command.Parameters.AddWithValue("@Weight", ProductWeightTextBox.Text);
                 command.Parameters.AddWithValue("@Price", ProductPriceTextBox.Text);
                 command.Parameters.AddWithValue("@ThresholdValue", ProductThresholdValueTextBox.Text);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show($"Товар {ProductNameTextBox.Text} добавлен в базу данных", "Сообщение");
                 connectionToDataBase.Close();
 
                 UpdateDataInProductsDataGridView();
@@ -184,15 +191,14 @@ namespace WindowsFormsApp1
                 SqlConnection connectionToDataBase = new SqlConnection(connectionString);
                 connectionToDataBase.Open();
 
-                command = new SqlCommand("delete Products where Id=@Id", connectionToDataBase);
+                command = new SqlCommand("DELETE Products where Id = @Id", connectionToDataBase);
                 command.Parameters.AddWithValue("@Id", ChosenProductId);
                 command.ExecuteNonQuery();
 
-                command = new SqlCommand("DELETE Entries WHERE ProductId=@ProductId", connectionToDataBase);
+                command = new SqlCommand("DELETE Entries WHERE ProductId = @ProductId", connectionToDataBase);
                 command.Parameters.AddWithValue("@ProductId", ChosenWarehouseId);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show($"Товар {ProductNameTextBox.Text} и все связанные с ним записи были удалены", "Сообщение");
                 connectionToDataBase.Close();
 
                 UpdateDataInProductsDataGridView();
@@ -259,12 +265,11 @@ namespace WindowsFormsApp1
                 SqlConnection connectionToDataBase = new SqlConnection(connectionString);
                 connectionToDataBase.Open();
 
-                command = new SqlCommand("INSERT INTO Warehouses(Name,Adress) values(@Name,@Adress)", connectionToDataBase);
+                command = new SqlCommand("INSERT INTO Warehouses(Name, Adress) values(@Name, @Adress)", connectionToDataBase);
                 command.Parameters.AddWithValue("@Name", WarehouseNameTextBox.Text);
                 command.Parameters.AddWithValue("@Adress", WarehouseAdressTextBox.Text);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show($"Склад {WarehouseNameTextBox.Text} добавлен в базу данных", "Сообщение");
                 connectionToDataBase.Close();
 
                 UpdateDataInWarehousesDataGridView();
@@ -318,7 +323,6 @@ namespace WindowsFormsApp1
                 command.Parameters.AddWithValue("@WarehouseId", ChosenWarehouseId);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show($"Склад {WarehouseNameTextBox.Text} и все связанные с ним записи удалены", "Сообщение");
                 connectionToDataBase.Close();
 
                 UpdateDataInWarehousesDataGridView();
@@ -410,7 +414,7 @@ namespace WindowsFormsApp1
             SqlConnection connectionToDataBase = new SqlConnection(connectionString);
             connectionToDataBase.Open();
 
-            string query = @"SELECT Entries.Id, Products.Name AS ProductName, Warehouses.Name AS WarehouseName, Entries.Count FROM Entries JOIN Products ON Entries.ProductId = Products.Id JOIN Warehouses ON Entries.WarehouseId = Warehouses.Id ORDER BY Count";
+            string query = @"SELECT Entries.Id, Products.Name AS ProductName, Warehouses.Name AS WarehouseName, Entries.Count FROM Entries JOIN Products ON Entries.ProductId = Products.Id JOIN Warehouses ON Entries.WarehouseId = Warehouses.Id ORDER BY Entries.Id";
 
             EntiresDataAdapter = new SqlDataAdapter(query, connectionToDataBase);
             EntriesTable = new DataTable();

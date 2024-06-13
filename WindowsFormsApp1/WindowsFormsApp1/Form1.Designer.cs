@@ -579,7 +579,7 @@
             this.MessagesListView.Location = new System.Drawing.Point(23, 928);
             this.MessagesListView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MessagesListView.Name = "MessagesListView";
-            this.MessagesListView.Size = new System.Drawing.Size(964, 109);
+            this.MessagesListView.Size = new System.Drawing.Size(964, 59);
             this.MessagesListView.TabIndex = 72;
             this.MessagesListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -618,7 +618,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 1047);
+            this.ClientSize = new System.Drawing.Size(997, 994);
             this.Controls.Add(this.MessagesListView);
             this.Controls.Add(this.RemoveFromWarehouseButton);
             this.Controls.Add(this.AddToWarehouseButton);
