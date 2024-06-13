@@ -76,6 +76,7 @@
             this.ProductCountTextBox = new System.Windows.Forms.TextBox();
             this.RemoveFromWarehouseButton = new System.Windows.Forms.Button();
             this.AddToWarehouseButton = new System.Windows.Forms.Button();
+            this.MessagesListView = new System.Windows.Forms.ListView();
             this.idDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WarehouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,7 +94,8 @@
             // 
             this.ProductsLabel.AutoSize = true;
             this.ProductsLabel.Font = new System.Drawing.Font("Montserrat", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ProductsLabel.Location = new System.Drawing.Point(7, 9);
+            this.ProductsLabel.Location = new System.Drawing.Point(14, 10);
+            this.ProductsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ProductsLabel.Name = "ProductsLabel";
             this.ProductsLabel.Size = new System.Drawing.Size(87, 26);
             this.ProductsLabel.TabIndex = 1;
@@ -113,10 +115,11 @@
             this.priceDataGridViewTextBoxColumn,
             this.thresholdValueDataGridViewTextBoxColumn});
             this.ProductsDataGridView.DataSource = this.productsBindingSource;
-            this.ProductsDataGridView.Location = new System.Drawing.Point(13, 39);
+            this.ProductsDataGridView.Location = new System.Drawing.Point(393, 10);
+            this.ProductsDataGridView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ProductsDataGridView.Name = "ProductsDataGridView";
             this.ProductsDataGridView.ReadOnly = true;
-            this.ProductsDataGridView.Size = new System.Drawing.Size(594, 278);
+            this.ProductsDataGridView.Size = new System.Drawing.Size(594, 324);
             this.ProductsDataGridView.TabIndex = 2;
             this.ProductsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ProductsDataGridView_CellContentClick);
             // 
@@ -170,9 +173,10 @@
             // DeleteProductButton
             // 
             this.DeleteProductButton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeleteProductButton.Location = new System.Drawing.Point(826, 290);
+            this.DeleteProductButton.Location = new System.Drawing.Point(23, 303);
+            this.DeleteProductButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.DeleteProductButton.Name = "DeleteProductButton";
-            this.DeleteProductButton.Size = new System.Drawing.Size(96, 27);
+            this.DeleteProductButton.Size = new System.Drawing.Size(350, 31);
             this.DeleteProductButton.TabIndex = 51;
             this.DeleteProductButton.Text = "Удалить";
             this.DeleteProductButton.UseVisualStyleBackColor = true;
@@ -181,9 +185,10 @@
             // ChangeProductButtton
             // 
             this.ChangeProductButtton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChangeProductButtton.Location = new System.Drawing.Point(724, 290);
+            this.ChangeProductButtton.Location = new System.Drawing.Point(23, 265);
+            this.ChangeProductButtton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ChangeProductButtton.Name = "ChangeProductButtton";
-            this.ChangeProductButtton.Size = new System.Drawing.Size(96, 27);
+            this.ChangeProductButtton.Size = new System.Drawing.Size(350, 31);
             this.ChangeProductButtton.TabIndex = 50;
             this.ChangeProductButtton.Text = "Изменить";
             this.ChangeProductButtton.UseVisualStyleBackColor = true;
@@ -192,9 +197,10 @@
             // AddNewProductButton
             // 
             this.AddNewProductButton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddNewProductButton.Location = new System.Drawing.Point(622, 290);
+            this.AddNewProductButton.Location = new System.Drawing.Point(23, 227);
+            this.AddNewProductButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.AddNewProductButton.Name = "AddNewProductButton";
-            this.AddNewProductButton.Size = new System.Drawing.Size(96, 27);
+            this.AddNewProductButton.Size = new System.Drawing.Size(350, 31);
             this.AddNewProductButton.TabIndex = 49;
             this.AddNewProductButton.Text = "Добавить";
             this.AddNewProductButton.UseVisualStyleBackColor = true;
@@ -203,9 +209,10 @@
             // ProductThresholdValueTextBox
             // 
             this.ProductThresholdValueTextBox.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold);
-            this.ProductThresholdValueTextBox.Location = new System.Drawing.Point(622, 224);
+            this.ProductThresholdValueTextBox.Location = new System.Drawing.Point(23, 196);
+            this.ProductThresholdValueTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ProductThresholdValueTextBox.Name = "ProductThresholdValueTextBox";
-            this.ProductThresholdValueTextBox.Size = new System.Drawing.Size(300, 21);
+            this.ProductThresholdValueTextBox.Size = new System.Drawing.Size(349, 21);
             this.ProductThresholdValueTextBox.TabIndex = 48;
             this.ProductThresholdValueTextBox.TextChanged += new System.EventHandler(this.ProductThresholdValueTextBox_TextChanged);
             // 
@@ -213,7 +220,8 @@
             // 
             this.ProductThresholdValueLabel.AutoSize = true;
             this.ProductThresholdValueLabel.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ProductThresholdValueLabel.Location = new System.Drawing.Point(622, 203);
+            this.ProductThresholdValueLabel.Location = new System.Drawing.Point(20, 172);
+            this.ProductThresholdValueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ProductThresholdValueLabel.Name = "ProductThresholdValueLabel";
             this.ProductThresholdValueLabel.Size = new System.Drawing.Size(130, 18);
             this.ProductThresholdValueLabel.TabIndex = 47;
@@ -223,9 +231,10 @@
             // ProductPriceTextBox
             // 
             this.ProductPriceTextBox.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ProductPriceTextBox.Location = new System.Drawing.Point(622, 168);
+            this.ProductPriceTextBox.Location = new System.Drawing.Point(184, 135);
+            this.ProductPriceTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ProductPriceTextBox.Name = "ProductPriceTextBox";
-            this.ProductPriceTextBox.Size = new System.Drawing.Size(300, 21);
+            this.ProductPriceTextBox.Size = new System.Drawing.Size(188, 21);
             this.ProductPriceTextBox.TabIndex = 46;
             this.ProductPriceTextBox.TextChanged += new System.EventHandler(this.ProductPriceTextBox_TextChanged);
             // 
@@ -233,7 +242,8 @@
             // 
             this.ProductPriceLabel.AutoSize = true;
             this.ProductPriceLabel.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ProductPriceLabel.Location = new System.Drawing.Point(622, 147);
+            this.ProductPriceLabel.Location = new System.Drawing.Point(181, 111);
+            this.ProductPriceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ProductPriceLabel.Name = "ProductPriceLabel";
             this.ProductPriceLabel.Size = new System.Drawing.Size(78, 18);
             this.ProductPriceLabel.TabIndex = 45;
@@ -243,9 +253,10 @@
             // ProductWeightTextBox
             // 
             this.ProductWeightTextBox.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ProductWeightTextBox.Location = new System.Drawing.Point(622, 114);
+            this.ProductWeightTextBox.Location = new System.Drawing.Point(23, 135);
+            this.ProductWeightTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ProductWeightTextBox.Name = "ProductWeightTextBox";
-            this.ProductWeightTextBox.Size = new System.Drawing.Size(300, 21);
+            this.ProductWeightTextBox.Size = new System.Drawing.Size(148, 21);
             this.ProductWeightTextBox.TabIndex = 44;
             this.ProductWeightTextBox.TextChanged += new System.EventHandler(this.ProductWeightTextBox_TextChanged);
             // 
@@ -253,7 +264,8 @@
             // 
             this.ProductWeightLabel.AutoSize = true;
             this.ProductWeightLabel.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ProductWeightLabel.Location = new System.Drawing.Point(622, 93);
+            this.ProductWeightLabel.Location = new System.Drawing.Point(20, 111);
+            this.ProductWeightLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ProductWeightLabel.Name = "ProductWeightLabel";
             this.ProductWeightLabel.Size = new System.Drawing.Size(33, 18);
             this.ProductWeightLabel.TabIndex = 43;
@@ -263,9 +275,10 @@
             // ProductNameTextBox
             // 
             this.ProductNameTextBox.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ProductNameTextBox.Location = new System.Drawing.Point(622, 60);
+            this.ProductNameTextBox.Location = new System.Drawing.Point(23, 80);
+            this.ProductNameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ProductNameTextBox.Name = "ProductNameTextBox";
-            this.ProductNameTextBox.Size = new System.Drawing.Size(300, 21);
+            this.ProductNameTextBox.Size = new System.Drawing.Size(349, 21);
             this.ProductNameTextBox.TabIndex = 42;
             this.ProductNameTextBox.TextChanged += new System.EventHandler(this.ProductNameTextBox_TextChanged);
             // 
@@ -273,7 +286,8 @@
             // 
             this.ProductNameLabel.AutoSize = true;
             this.ProductNameLabel.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ProductNameLabel.Location = new System.Drawing.Point(622, 39);
+            this.ProductNameLabel.Location = new System.Drawing.Point(20, 55);
+            this.ProductNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ProductNameLabel.Name = "ProductNameLabel";
             this.ProductNameLabel.Size = new System.Drawing.Size(113, 18);
             this.ProductNameLabel.TabIndex = 41;
@@ -283,9 +297,10 @@
             // WarehouseAdressTextBox
             // 
             this.WarehouseAdressTextBox.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold);
-            this.WarehouseAdressTextBox.Location = new System.Drawing.Point(619, 441);
+            this.WarehouseAdressTextBox.Location = new System.Drawing.Point(23, 474);
+            this.WarehouseAdressTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.WarehouseAdressTextBox.Name = "WarehouseAdressTextBox";
-            this.WarehouseAdressTextBox.Size = new System.Drawing.Size(303, 21);
+            this.WarehouseAdressTextBox.Size = new System.Drawing.Size(349, 21);
             this.WarehouseAdressTextBox.TabIndex = 56;
             this.WarehouseAdressTextBox.TextChanged += new System.EventHandler(this.WarehouseAdressTextBox_TextChanged);
             // 
@@ -293,7 +308,8 @@
             // 
             this.WarehouseAdressLabel.AutoSize = true;
             this.WarehouseAdressLabel.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WarehouseAdressLabel.Location = new System.Drawing.Point(619, 420);
+            this.WarehouseAdressLabel.Location = new System.Drawing.Point(20, 450);
+            this.WarehouseAdressLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.WarehouseAdressLabel.Name = "WarehouseAdressLabel";
             this.WarehouseAdressLabel.Size = new System.Drawing.Size(51, 18);
             this.WarehouseAdressLabel.TabIndex = 55;
@@ -303,9 +319,10 @@
             // WarehouseNameTextBox
             // 
             this.WarehouseNameTextBox.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold);
-            this.WarehouseNameTextBox.Location = new System.Drawing.Point(619, 387);
+            this.WarehouseNameTextBox.Location = new System.Drawing.Point(23, 412);
+            this.WarehouseNameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.WarehouseNameTextBox.Name = "WarehouseNameTextBox";
-            this.WarehouseNameTextBox.Size = new System.Drawing.Size(303, 21);
+            this.WarehouseNameTextBox.Size = new System.Drawing.Size(349, 21);
             this.WarehouseNameTextBox.TabIndex = 54;
             this.WarehouseNameTextBox.TextChanged += new System.EventHandler(this.WarehouseNameTextBox_TextChanged);
             // 
@@ -313,7 +330,8 @@
             // 
             this.WarehouseNameLabel.AutoSize = true;
             this.WarehouseNameLabel.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WarehouseNameLabel.Location = new System.Drawing.Point(619, 366);
+            this.WarehouseNameLabel.Location = new System.Drawing.Point(20, 388);
+            this.WarehouseNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.WarehouseNameLabel.Name = "WarehouseNameLabel";
             this.WarehouseNameLabel.Size = new System.Drawing.Size(76, 18);
             this.WarehouseNameLabel.TabIndex = 53;
@@ -324,7 +342,8 @@
             // 
             this.WarehousesLabel.AutoSize = true;
             this.WarehousesLabel.Font = new System.Drawing.Font("Montserrat", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WarehousesLabel.Location = new System.Drawing.Point(7, 337);
+            this.WarehousesLabel.Location = new System.Drawing.Point(14, 352);
+            this.WarehousesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.WarehousesLabel.Name = "WarehousesLabel";
             this.WarehousesLabel.Size = new System.Drawing.Size(91, 26);
             this.WarehousesLabel.TabIndex = 52;
@@ -342,10 +361,11 @@
             this.nameDataGridViewTextBoxColumn1,
             this.adressDataGridViewTextBoxColumn});
             this.WarehousesDataGridView.DataSource = this.warehousesBindingSource;
-            this.WarehousesDataGridView.Location = new System.Drawing.Point(12, 366);
+            this.WarehousesDataGridView.Location = new System.Drawing.Point(393, 352);
+            this.WarehousesDataGridView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.WarehousesDataGridView.Name = "WarehousesDataGridView";
             this.WarehousesDataGridView.ReadOnly = true;
-            this.WarehousesDataGridView.Size = new System.Drawing.Size(593, 278);
+            this.WarehousesDataGridView.Size = new System.Drawing.Size(594, 261);
             this.WarehousesDataGridView.TabIndex = 60;
             this.WarehousesDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WarehousesDataGridView_CellContentClick);
             // 
@@ -381,9 +401,10 @@
             // AddNewWarehouseButton
             // 
             this.AddNewWarehouseButton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddNewWarehouseButton.Location = new System.Drawing.Point(622, 617);
+            this.AddNewWarehouseButton.Location = new System.Drawing.Point(23, 505);
+            this.AddNewWarehouseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.AddNewWarehouseButton.Name = "AddNewWarehouseButton";
-            this.AddNewWarehouseButton.Size = new System.Drawing.Size(96, 27);
+            this.AddNewWarehouseButton.Size = new System.Drawing.Size(350, 31);
             this.AddNewWarehouseButton.TabIndex = 57;
             this.AddNewWarehouseButton.Text = "Добавить";
             this.AddNewWarehouseButton.UseVisualStyleBackColor = true;
@@ -392,9 +413,10 @@
             // ChangeWarehouseButton
             // 
             this.ChangeWarehouseButton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChangeWarehouseButton.Location = new System.Drawing.Point(724, 617);
+            this.ChangeWarehouseButton.Location = new System.Drawing.Point(23, 543);
+            this.ChangeWarehouseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ChangeWarehouseButton.Name = "ChangeWarehouseButton";
-            this.ChangeWarehouseButton.Size = new System.Drawing.Size(96, 27);
+            this.ChangeWarehouseButton.Size = new System.Drawing.Size(350, 31);
             this.ChangeWarehouseButton.TabIndex = 58;
             this.ChangeWarehouseButton.Text = "Изменить";
             this.ChangeWarehouseButton.UseVisualStyleBackColor = true;
@@ -403,9 +425,10 @@
             // DeleteWarehouseButton
             // 
             this.DeleteWarehouseButton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DeleteWarehouseButton.Location = new System.Drawing.Point(826, 617);
+            this.DeleteWarehouseButton.Location = new System.Drawing.Point(23, 582);
+            this.DeleteWarehouseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.DeleteWarehouseButton.Name = "DeleteWarehouseButton";
-            this.DeleteWarehouseButton.Size = new System.Drawing.Size(96, 27);
+            this.DeleteWarehouseButton.Size = new System.Drawing.Size(350, 31);
             this.DeleteWarehouseButton.TabIndex = 59;
             this.DeleteWarehouseButton.Text = "Удалить";
             this.DeleteWarehouseButton.UseVisualStyleBackColor = true;
@@ -423,7 +446,8 @@
             // 
             this.CountInfoLabel.AutoSize = true;
             this.CountInfoLabel.Font = new System.Drawing.Font("Montserrat", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CountInfoLabel.Location = new System.Drawing.Point(7, 661);
+            this.CountInfoLabel.Location = new System.Drawing.Point(16, 629);
+            this.CountInfoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CountInfoLabel.Name = "CountInfoLabel";
             this.CountInfoLabel.Size = new System.Drawing.Size(287, 26);
             this.CountInfoLabel.TabIndex = 61;
@@ -442,10 +466,11 @@
             this.WarehouseName,
             this.countDataGridViewTextBoxColumn});
             this.EntriesGridView.DataSource = this.entriesBindingSource;
-            this.EntriesGridView.Location = new System.Drawing.Point(12, 690);
+            this.EntriesGridView.Location = new System.Drawing.Point(393, 631);
+            this.EntriesGridView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.EntriesGridView.Name = "EntriesGridView";
             this.EntriesGridView.ReadOnly = true;
-            this.EntriesGridView.Size = new System.Drawing.Size(593, 218);
+            this.EntriesGridView.Size = new System.Drawing.Size(594, 290);
             this.EntriesGridView.TabIndex = 62;
             this.EntriesGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EntriesGridView_CellContentClick);
             // 
@@ -462,7 +487,8 @@
             // 
             this.ChooseProductLabel.AutoSize = true;
             this.ChooseProductLabel.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ChooseProductLabel.Location = new System.Drawing.Point(619, 690);
+            this.ChooseProductLabel.Location = new System.Drawing.Point(19, 669);
+            this.ChooseProductLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ChooseProductLabel.Name = "ChooseProductLabel";
             this.ChooseProductLabel.Size = new System.Drawing.Size(48, 18);
             this.ChooseProductLabel.TabIndex = 63;
@@ -473,9 +499,10 @@
             // 
             this.ChooseProductComboBox.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold);
             this.ChooseProductComboBox.FormattingEnabled = true;
-            this.ChooseProductComboBox.Location = new System.Drawing.Point(619, 712);
+            this.ChooseProductComboBox.Location = new System.Drawing.Point(22, 695);
+            this.ChooseProductComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ChooseProductComboBox.Name = "ChooseProductComboBox";
-            this.ChooseProductComboBox.Size = new System.Drawing.Size(303, 23);
+            this.ChooseProductComboBox.Size = new System.Drawing.Size(350, 23);
             this.ChooseProductComboBox.TabIndex = 64;
             this.ChooseProductComboBox.SelectedIndexChanged += new System.EventHandler(this.ChooseProductComboBox_SelectedIndexChanged);
             // 
@@ -483,9 +510,10 @@
             // 
             this.ChooseWarehouseComboBox.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold);
             this.ChooseWarehouseComboBox.FormattingEnabled = true;
-            this.ChooseWarehouseComboBox.Location = new System.Drawing.Point(619, 767);
+            this.ChooseWarehouseComboBox.Location = new System.Drawing.Point(22, 758);
+            this.ChooseWarehouseComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ChooseWarehouseComboBox.Name = "ChooseWarehouseComboBox";
-            this.ChooseWarehouseComboBox.Size = new System.Drawing.Size(303, 23);
+            this.ChooseWarehouseComboBox.Size = new System.Drawing.Size(350, 23);
             this.ChooseWarehouseComboBox.TabIndex = 66;
             this.ChooseWarehouseComboBox.SelectedIndexChanged += new System.EventHandler(this.ChooseWarehouseComboBox_SelectedIndexChanged);
             // 
@@ -493,7 +521,8 @@
             // 
             this.ChooseWarehouseLabel.AutoSize = true;
             this.ChooseWarehouseLabel.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ChooseWarehouseLabel.Location = new System.Drawing.Point(619, 745);
+            this.ChooseWarehouseLabel.Location = new System.Drawing.Point(19, 734);
+            this.ChooseWarehouseLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ChooseWarehouseLabel.Name = "ChooseWarehouseLabel";
             this.ChooseWarehouseLabel.Size = new System.Drawing.Size(50, 18);
             this.ChooseWarehouseLabel.TabIndex = 65;
@@ -504,7 +533,8 @@
             // 
             this.ProductCountLabel.AutoSize = true;
             this.ProductCountLabel.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ProductCountLabel.Location = new System.Drawing.Point(615, 800);
+            this.ProductCountLabel.Location = new System.Drawing.Point(19, 796);
+            this.ProductCountLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ProductCountLabel.Name = "ProductCountLabel";
             this.ProductCountLabel.Size = new System.Drawing.Size(87, 18);
             this.ProductCountLabel.TabIndex = 67;
@@ -513,31 +543,45 @@
             // ProductCountTextBox
             // 
             this.ProductCountTextBox.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold);
-            this.ProductCountTextBox.Location = new System.Drawing.Point(618, 821);
+            this.ProductCountTextBox.Location = new System.Drawing.Point(22, 820);
+            this.ProductCountTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ProductCountTextBox.Name = "ProductCountTextBox";
-            this.ProductCountTextBox.Size = new System.Drawing.Size(303, 21);
+            this.ProductCountTextBox.Size = new System.Drawing.Size(350, 21);
             this.ProductCountTextBox.TabIndex = 68;
             // 
             // RemoveFromWarehouseButton
             // 
             this.RemoveFromWarehouseButton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RemoveFromWarehouseButton.Location = new System.Drawing.Point(618, 881);
+            this.RemoveFromWarehouseButton.Location = new System.Drawing.Point(21, 890);
+            this.RemoveFromWarehouseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.RemoveFromWarehouseButton.Name = "RemoveFromWarehouseButton";
-            this.RemoveFromWarehouseButton.Size = new System.Drawing.Size(303, 27);
+            this.RemoveFromWarehouseButton.Size = new System.Drawing.Size(351, 31);
             this.RemoveFromWarehouseButton.TabIndex = 71;
             this.RemoveFromWarehouseButton.Text = "Удалить со склада";
             this.RemoveFromWarehouseButton.UseVisualStyleBackColor = true;
+            this.RemoveFromWarehouseButton.Click += new System.EventHandler(this.RemoveFromWarehouseButton_Click);
             // 
             // AddToWarehouseButton
             // 
             this.AddToWarehouseButton.Font = new System.Drawing.Font("Montserrat Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddToWarehouseButton.Location = new System.Drawing.Point(618, 848);
+            this.AddToWarehouseButton.Location = new System.Drawing.Point(21, 852);
+            this.AddToWarehouseButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.AddToWarehouseButton.Name = "AddToWarehouseButton";
-            this.AddToWarehouseButton.Size = new System.Drawing.Size(304, 27);
+            this.AddToWarehouseButton.Size = new System.Drawing.Size(352, 31);
             this.AddToWarehouseButton.TabIndex = 69;
             this.AddToWarehouseButton.Text = "Добавить на склад";
             this.AddToWarehouseButton.UseVisualStyleBackColor = true;
             this.AddToWarehouseButton.Click += new System.EventHandler(this.AddToWarehouseButton_Click);
+            // 
+            // MessagesListView
+            // 
+            this.MessagesListView.HideSelection = false;
+            this.MessagesListView.Location = new System.Drawing.Point(23, 928);
+            this.MessagesListView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MessagesListView.Name = "MessagesListView";
+            this.MessagesListView.Size = new System.Drawing.Size(964, 109);
+            this.MessagesListView.TabIndex = 72;
+            this.MessagesListView.UseCompatibleStateImageBehavior = false;
             // 
             // idDataGridViewTextBoxColumn2
             // 
@@ -549,6 +593,7 @@
             // 
             // ProductName
             // 
+            this.ProductName.DataPropertyName = "ProductName";
             this.ProductName.HeaderText = "Товар";
             this.ProductName.Name = "ProductName";
             this.ProductName.ReadOnly = true;
@@ -556,6 +601,7 @@
             // 
             // WarehouseName
             // 
+            this.WarehouseName.DataPropertyName = "WarehouseName";
             this.WarehouseName.HeaderText = "Склад";
             this.WarehouseName.Name = "WarehouseName";
             this.WarehouseName.ReadOnly = true;
@@ -570,9 +616,10 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 985);
+            this.ClientSize = new System.Drawing.Size(997, 1047);
+            this.Controls.Add(this.MessagesListView);
             this.Controls.Add(this.RemoveFromWarehouseButton);
             this.Controls.Add(this.AddToWarehouseButton);
             this.Controls.Add(this.ProductCountTextBox);
@@ -605,6 +652,8 @@
             this.Controls.Add(this.ProductNameLabel);
             this.Controls.Add(this.ProductsDataGridView);
             this.Controls.Add(this.ProductsLabel);
+            this.Font = new System.Drawing.Font("Montserrat Medium", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -669,6 +718,7 @@
         private System.Windows.Forms.TextBox ProductCountTextBox;
         private System.Windows.Forms.Button RemoveFromWarehouseButton;
         private System.Windows.Forms.Button AddToWarehouseButton;
+        private System.Windows.Forms.ListView MessagesListView;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn WarehouseName;

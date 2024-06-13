@@ -142,6 +142,7 @@ namespace WindowsFormsApp1
                 UpdateDataInProductsDataGridView();
                 ClearProductsFields();
                 FillProductComboBox();
+                FillEntriesDataGridView();
             } else
             {
                 MessageBox.Show("Поле \"Наименование\" не может быть пустым. Заполните его", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -169,6 +170,7 @@ namespace WindowsFormsApp1
                 UpdateDataInProductsDataGridView();
                 ClearProductsFields();
                 FillProductComboBox();
+                FillEntriesDataGridView();
             } else
             {
                 MessageBox.Show("Поле \"Наименование\" не может быть пустым. Заполните его", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -186,12 +188,17 @@ namespace WindowsFormsApp1
                 command.Parameters.AddWithValue("@Id", ChosenProductId);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show($"Товар был {ProductNameTextBox.Text} удалён", "Сообщение");
+                command = new SqlCommand("DELETE Entries WHERE ProductId=@ProductId", connectionToDataBase);
+                command.Parameters.AddWithValue("@ProductId", ChosenWarehouseId);
+                command.ExecuteNonQuery();
+
+                MessageBox.Show($"Товар {ProductNameTextBox.Text} и все связанные с ним записи были удалены", "Сообщение");
                 connectionToDataBase.Close();
 
                 UpdateDataInProductsDataGridView();
                 ClearProductsFields();
                 FillProductComboBox();
+                FillEntriesDataGridView();
             } else
             {
                 MessageBox.Show("Вы не выбрали товар. Выберите товар, который хотите удалить", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -263,6 +270,7 @@ namespace WindowsFormsApp1
                 UpdateDataInWarehousesDataGridView();
                 ClearWarehousesFields();
                 FillWarehouseComboBox();
+                FillEntriesDataGridView();
             } else
             {
                 MessageBox.Show("Поле Название (Name) не может быть пустым. Заполните его", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -276,7 +284,7 @@ namespace WindowsFormsApp1
                 SqlConnection connectionToDataBase = new SqlConnection(connectionString);
                 connectionToDataBase.Open();
 
-                command = new SqlCommand("UPDATE Warehouses SET Name=@Name,Adress=@Adress WHERE Id=@Id", connectionToDataBase);
+                command = new SqlCommand("UPDATE Warehouses SET Name = @Name, Adress = @Adress WHERE Id = @Id", connectionToDataBase);
                 command.Parameters.AddWithValue("@Id", ChosenWarehouseId);
                 command.Parameters.AddWithValue("@Name", WarehouseNameTextBox.Text);
                 command.Parameters.AddWithValue("@Adress", WarehouseAdressTextBox.Text);
@@ -288,6 +296,7 @@ namespace WindowsFormsApp1
                 UpdateDataInWarehousesDataGridView();
                 ClearWarehousesFields();
                 FillWarehouseComboBox();
+                FillEntriesDataGridView();
             } else
             {
                 MessageBox.Show("Поле Название (Name) не может быть пустым. Заполните его", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -301,11 +310,15 @@ namespace WindowsFormsApp1
                 SqlConnection connectionToDataBase = new SqlConnection(connectionString);
                 connectionToDataBase.Open();
 
-                command = new SqlCommand("DELETE Warehouses WHERE Id=@Id", connectionToDataBase);
+                command = new SqlCommand("DELETE Warehouses WHERE Id = @Id", connectionToDataBase);
                 command.Parameters.AddWithValue("@Id", ChosenWarehouseId);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show($"Склад {WarehouseNameTextBox.Text} удалён", "Сообщение");
+                command = new SqlCommand("DELETE Entries WHERE WarehouseId = @WarehouseId", connectionToDataBase);
+                command.Parameters.AddWithValue("@WarehouseId", ChosenWarehouseId);
+                command.ExecuteNonQuery();
+
+                MessageBox.Show($"Склад {WarehouseNameTextBox.Text} и все связанные с ним записи удалены", "Сообщение");
                 connectionToDataBase.Close();
 
                 UpdateDataInWarehousesDataGridView();
@@ -397,28 +410,93 @@ namespace WindowsFormsApp1
             SqlConnection connectionToDataBase = new SqlConnection(connectionString);
             connectionToDataBase.Open();
 
-            string query = @"
-                    SELECT
-                        Entries.Id,
-                        Products.Name AS ProductName,
-                        Warehouses.Name AS WarehouseName,
-                        Entries.Count
-                    FROM
-                        Entries
-                    JOIN
-                        Products ON Entries.ProductId = Products.Id
-                    JOIN
-                        Warehouses ON Entries.WarehouseId = Warehouses.Id";
+            string query = @"SELECT Entries.Id, Products.Name AS ProductName, Warehouses.Name AS WarehouseName, Entries.Count FROM Entries JOIN Products ON Entries.ProductId = Products.Id JOIN Warehouses ON Entries.WarehouseId = Warehouses.Id ORDER BY Count";
 
             EntiresDataAdapter = new SqlDataAdapter(query, connectionToDataBase);
-            DataTable entriesTable = new DataTable();
-            EntiresDataAdapter.Fill(entriesTable);
-            EntriesGridView.DataSource = entriesTable;
+            EntriesTable = new DataTable();
+            EntiresDataAdapter.Fill(EntriesTable);
+            EntriesGridView.DataSource = EntriesTable;
         }
 
         private void AddToWarehouseButton_Click(object sender, EventArgs e)
         {
+            ChosenProductId = (int)ChooseProductComboBox.SelectedValue;
+            ChosenWarehouseId = (int)ChooseWarehouseComboBox.SelectedValue;
+            int inputedCount = int.Parse(ProductCountTextBox.Text);
 
+            SqlConnection connectionToDataBase = new SqlConnection(connectionString);
+            connectionToDataBase.Open();
+
+            string selectQuery = "SELECT Count FROM Entries WHERE ProductId = @ProductId AND WarehouseId = @WarehouseId";
+            SqlCommand selectCommand = new SqlCommand(selectQuery, connectionToDataBase);
+            selectCommand.Parameters.AddWithValue("@ProductId", ChosenProductId);
+            selectCommand.Parameters.AddWithValue("@WarehouseId", ChosenWarehouseId);
+            object result = selectCommand.ExecuteScalar();
+
+            if (result != null)
+            {
+                int currentCount = (int)result;
+                int newCount = currentCount + inputedCount;
+
+                string updateQuery = "UPDATE Entries SET Count = @Count WHERE ProductId = @ProductId AND WarehouseId = @WarehouseId";
+                SqlCommand updateCommand = new SqlCommand(updateQuery, connectionToDataBase);
+                updateCommand.Parameters.AddWithValue("@Count", newCount);
+                updateCommand.Parameters.AddWithValue("@ProductId", ChosenProductId);
+                updateCommand.Parameters.AddWithValue("@WarehouseId", ChosenWarehouseId);
+                updateCommand.ExecuteNonQuery();
+            } else
+            {
+                string insertQuery = "INSERT INTO Entries (ProductId, WarehouseId, Count) VALUES (@ProductId, @WarehouseId, @Count)";
+                SqlCommand insertCommand = new SqlCommand(insertQuery, connectionToDataBase);
+                insertCommand.Parameters.AddWithValue("@ProductId", ChosenProductId);
+                insertCommand.Parameters.AddWithValue("@WarehouseId", ChosenWarehouseId);
+                insertCommand.Parameters.AddWithValue("@Count", inputedCount);
+                insertCommand.ExecuteNonQuery();
+            }
+
+            FillEntriesDataGridView();
+        }
+
+        private void RemoveFromWarehouseButton_Click(object sender, EventArgs e)
+        {
+            ChosenProductId = (int)ChooseProductComboBox.SelectedValue;
+            ChosenWarehouseId = (int)ChooseWarehouseComboBox.SelectedValue;
+            int inputedCount = int.Parse(ProductCountTextBox.Text);
+
+            SqlConnection connectionToDataBase = new SqlConnection(connectionString);
+            connectionToDataBase.Open();
+
+            string selectQuery = "SELECT Count FROM Entries WHERE ProductId = @ProductId AND WarehouseId = @WarehouseId";
+            SqlCommand selectCommand = new SqlCommand(selectQuery, connectionToDataBase);
+            selectCommand.Parameters.AddWithValue("@ProductId", ChosenProductId);
+            selectCommand.Parameters.AddWithValue("@WarehouseId", ChosenWarehouseId);
+
+            object result = selectCommand.ExecuteScalar();
+
+            if (result != null)
+            {
+                int currentCount = (int)result;
+                int newCount = currentCount - inputedCount;
+
+                if (newCount > 0)
+                {
+                    string updateQuery = "UPDATE Entries SET Count = @Count WHERE ProductId = @ProductId AND WarehouseId = @WarehouseId";
+                    SqlCommand updateCommand = new SqlCommand(updateQuery, connectionToDataBase);
+                    updateCommand.Parameters.AddWithValue("@Count", newCount);
+                    updateCommand.Parameters.AddWithValue("@ProductId", ChosenProductId);
+                    updateCommand.Parameters.AddWithValue("@WarehouseId", ChosenWarehouseId);
+                    updateCommand.ExecuteNonQuery();
+                } else
+                {
+                    string deleteQuery = "DELETE FROM Entries WHERE ProductId = @ProductId AND WarehouseId = @WarehouseId";
+                    SqlCommand deleteCommand = new SqlCommand(deleteQuery, connectionToDataBase);
+                    deleteCommand.Parameters.AddWithValue("@ProductId", ChosenProductId);
+                    deleteCommand.Parameters.AddWithValue("@WarehouseId", ChosenWarehouseId);
+                    deleteCommand.ExecuteNonQuery();
+                }
+            }
+
+            FillEntriesDataGridView();
         }
     }
 }
