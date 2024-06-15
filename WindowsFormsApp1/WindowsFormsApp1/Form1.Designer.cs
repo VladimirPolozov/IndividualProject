@@ -66,6 +66,10 @@
             this.warehousesTableAdapter = new WindowsFormsApp1.WarehouseSystemDBDataSetTableAdapters.WarehousesTableAdapter();
             this.CountInfoLabel = new System.Windows.Forms.Label();
             this.EntriesGridView = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WarehouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.entriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entriesTableAdapter = new WindowsFormsApp1.WarehouseSystemDBDataSetTableAdapters.EntriesTableAdapter();
             this.ChooseProductLabel = new System.Windows.Forms.Label();
@@ -76,11 +80,6 @@
             this.ProductCountTextBox = new System.Windows.Forms.TextBox();
             this.RemoveFromWarehouseButton = new System.Windows.Forms.Button();
             this.AddToWarehouseButton = new System.Windows.Forms.Button();
-            this.MessagesListView = new System.Windows.Forms.ListView();
-            this.idDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WarehouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.warehouseSystemDBDataSet)).BeginInit();
@@ -474,6 +473,37 @@
             this.EntriesGridView.TabIndex = 62;
             this.EntriesGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EntriesGridView_CellContentClick);
             // 
+            // idDataGridViewTextBoxColumn2
+            // 
+            this.idDataGridViewTextBoxColumn2.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn2.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn2.Name = "idDataGridViewTextBoxColumn2";
+            this.idDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn2.Width = 50;
+            // 
+            // ProductName
+            // 
+            this.ProductName.DataPropertyName = "ProductName";
+            this.ProductName.HeaderText = "Товар";
+            this.ProductName.Name = "ProductName";
+            this.ProductName.ReadOnly = true;
+            this.ProductName.Width = 200;
+            // 
+            // WarehouseName
+            // 
+            this.WarehouseName.DataPropertyName = "WarehouseName";
+            this.WarehouseName.HeaderText = "Склад";
+            this.WarehouseName.Name = "WarehouseName";
+            this.WarehouseName.ReadOnly = true;
+            this.WarehouseName.Width = 200;
+            // 
+            // countDataGridViewTextBoxColumn
+            // 
+            this.countDataGridViewTextBoxColumn.DataPropertyName = "Count";
+            this.countDataGridViewTextBoxColumn.HeaderText = "Кол-во";
+            this.countDataGridViewTextBoxColumn.Name = "countDataGridViewTextBoxColumn";
+            this.countDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // entriesBindingSource
             // 
             this.entriesBindingSource.DataMember = "Entries";
@@ -573,53 +603,11 @@
             this.AddToWarehouseButton.UseVisualStyleBackColor = true;
             this.AddToWarehouseButton.Click += new System.EventHandler(this.AddToWarehouseButton_Click);
             // 
-            // MessagesListView
-            // 
-            this.MessagesListView.HideSelection = false;
-            this.MessagesListView.Location = new System.Drawing.Point(23, 928);
-            this.MessagesListView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MessagesListView.Name = "MessagesListView";
-            this.MessagesListView.Size = new System.Drawing.Size(964, 59);
-            this.MessagesListView.TabIndex = 72;
-            this.MessagesListView.UseCompatibleStateImageBehavior = false;
-            // 
-            // idDataGridViewTextBoxColumn2
-            // 
-            this.idDataGridViewTextBoxColumn2.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn2.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn2.Name = "idDataGridViewTextBoxColumn2";
-            this.idDataGridViewTextBoxColumn2.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn2.Width = 50;
-            // 
-            // ProductName
-            // 
-            this.ProductName.DataPropertyName = "ProductName";
-            this.ProductName.HeaderText = "Товар";
-            this.ProductName.Name = "ProductName";
-            this.ProductName.ReadOnly = true;
-            this.ProductName.Width = 200;
-            // 
-            // WarehouseName
-            // 
-            this.WarehouseName.DataPropertyName = "WarehouseName";
-            this.WarehouseName.HeaderText = "Склад";
-            this.WarehouseName.Name = "WarehouseName";
-            this.WarehouseName.ReadOnly = true;
-            this.WarehouseName.Width = 200;
-            // 
-            // countDataGridViewTextBoxColumn
-            // 
-            this.countDataGridViewTextBoxColumn.DataPropertyName = "Count";
-            this.countDataGridViewTextBoxColumn.HeaderText = "Кол-во";
-            this.countDataGridViewTextBoxColumn.Name = "countDataGridViewTextBoxColumn";
-            this.countDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 994);
-            this.Controls.Add(this.MessagesListView);
+            this.ClientSize = new System.Drawing.Size(997, 932);
             this.Controls.Add(this.RemoveFromWarehouseButton);
             this.Controls.Add(this.AddToWarehouseButton);
             this.Controls.Add(this.ProductCountTextBox);
@@ -718,7 +706,6 @@
         private System.Windows.Forms.TextBox ProductCountTextBox;
         private System.Windows.Forms.Button RemoveFromWarehouseButton;
         private System.Windows.Forms.Button AddToWarehouseButton;
-        private System.Windows.Forms.ListView MessagesListView;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn WarehouseName;

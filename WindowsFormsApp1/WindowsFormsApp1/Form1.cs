@@ -2,12 +2,15 @@
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+
 
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IObserver
     {
+        private ThresholdChecker thresholdChecker;
+
         public string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Надежда\\source\\repos\\IndividualProjectV2\\WindowsFormsApp1\\WindowsFormsApp1\\WarehouseSystemDB.mdf;Integrated Security=True;Connect Timeout=30";
         public SqlConnection connectionToDataBase;
         public SqlCommand command;
@@ -32,11 +35,6 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void ProductsLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             string selectQuery = "SELECT * FROM Products";
@@ -57,6 +55,14 @@ namespace WindowsFormsApp1
             FillWarehouseComboBox();
             FillEntriesDataGridView();
             EntriesGridView.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(EntriesGridView_OnRowHeaderMouseClick);
+
+            thresholdChecker = new ThresholdChecker();
+            thresholdChecker.Attach(this);
+        }
+
+        public void Update(string message)
+        {
+            MessageBox.Show(message, "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ProductsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -88,6 +94,11 @@ namespace WindowsFormsApp1
             ChooseProductComboBox.SelectedValue = int.Parse(selectedRow.Cells[4].Value.ToString());
             ChooseWarehouseComboBox.SelectedValue = int.Parse(selectedRow.Cells[5].Value.ToString());
             ProductCountTextBox.Text = selectedRow.Cells[3].Value.ToString();*/
+        }
+
+        private void ProductsLabel_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void ProductNameLabel_Click(object sender, EventArgs e)
@@ -459,6 +470,7 @@ namespace WindowsFormsApp1
             }
 
             FillEntriesDataGridView();
+            CheckThresholds();
         }
 
         private void RemoveFromWarehouseButton_Click(object sender, EventArgs e)
@@ -501,6 +513,100 @@ namespace WindowsFormsApp1
             }
 
             FillEntriesDataGridView();
+            CheckThresholds();
+        }
+
+        private void CheckThresholds()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = @"SELECT * FROM Entries";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+                DataTable entriesTable = new DataTable();
+                adapter.Fill(entriesTable);
+                thresholdChecker.CheckThresholds(entriesTable, connection);
+            }
+        }
+    }
+
+    public interface IObserver
+    {
+        void Update(string message);
+    }
+
+    public interface ISubject
+    {
+        void Attach(IObserver observer);
+        void Detach(IObserver observer);
+        void Notify(string message);
+    }
+
+    public class ThresholdChecker : ISubject
+    {
+        private readonly List<IObserver> observers = new List<IObserver>();
+
+        public void Attach(IObserver observer)
+        {
+            observers.Add(observer);
+        }
+
+        public void Detach(IObserver observer)
+        {
+            observers.Remove(observer);
+        }
+
+        public void Notify(string message)
+        {
+            foreach (var observer in observers)
+            {
+                observer.Update(message);
+            }
+        }
+
+        public void CheckThresholds(DataTable entriesTable, SqlConnection connection)
+        {
+            foreach (DataRow row in entriesTable.Rows)
+            {
+                int productId = (int)row["ProductId"];
+                int count = (int)row["Count"];
+                int threshold = GetThresholdForProduct(productId, connection);
+
+                if (count <= threshold)
+                {
+                    string productName = GetProductName(productId, connection);
+                    string warehouseName = GetWarehouseName((int)row["WarehouseId"], connection);
+                    string message = $"Товар {productName} достиг своего порогового значения на складе {warehouseName}";
+                    Notify(message);
+                }
+            }
+        }
+
+        private int GetThresholdForProduct(int productId, SqlConnection connection)
+        {
+            // Получение порогового значения для продукта из БД
+            string query = "SELECT ThresholdValue FROM Products WHERE Id = @ProductId";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ProductId", productId);
+            return (int)command.ExecuteScalar();
+        }
+
+        private string GetProductName(int productId, SqlConnection connection)
+        {
+            // Получение наименования продукта из БД
+            string query = "SELECT Name FROM Products WHERE Id = @ProductId";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ProductId", productId);
+            return command.ExecuteScalar().ToString();
+        }
+
+        private string GetWarehouseName(int warehouseId, SqlConnection connection)
+        {
+            // Получение наименования склада из БД
+            string query = "SELECT Name FROM Warehouses WHERE Id = @WarehouseId";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@WarehouseId", warehouseId);
+            return command.ExecuteScalar().ToString();
         }
     }
 }
